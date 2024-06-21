@@ -6,6 +6,7 @@ import './App.css'
 let Engine = Matter.Engine;
 let World = Matter.World;
 let Bodies = Matter.Bodies;
+let boxes = [];
 
 let engine, box1, world;
 
@@ -25,12 +26,15 @@ function sketch(p) {
 
     p.mousePressed = function() {
         let newBox = Bodies.rectangle(p.mouseX, p.mouseY, 20, 20);
-        World.add(world, [newBox]);
-        p.rect(newBox.position.x, newBox.position.y, 20, 20);
+        boxes.push(newBox);
     }
 
     p.draw = function () {
         p.background(51);
+        for(let i = 0; i < boxes.length; i++) {
+            p.rect(boxes[i].position.x, boxes[i].position.y, 20, 20);
+            World.add(world, [boxes[i]]);
+        }
         p.rect(box1.position.x, box1.position.y, 80, 80)
     }
 }
