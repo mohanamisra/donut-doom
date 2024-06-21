@@ -2,18 +2,17 @@ import React, { useRef, useEffect } from 'react';
 import p5 from 'p5';
 import Matter from 'matter-js'
 import './App.css'
+import Box from "./components/Box.jsx";
 
 let Engine = Matter.Engine;
 let World = Matter.World;
 let Bodies = Matter.Bodies;
-let boxes = [];
-let ground;
-
-let engine, box1, world;
+let ground, box;
 
 function sketch(p) {
     p.setup = function() {
         p.createCanvas(p.windowWidth, p.windowHeight);
+        ground = new Box(0, p.height - 20, p.width, 20);
     }
 
     p.windowResized = function() {
@@ -21,6 +20,8 @@ function sketch(p) {
     }
 
     p.draw = function () {
+        p.background(51);
+        ground.show(p);
     }
 }
 

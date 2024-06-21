@@ -1,21 +1,13 @@
-import React from 'react';
+export default class Box {
+    constructor(x, y, w, h) {
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+    }
 
-const Box = ({ x, y, w, h, angle }) => {
-    return (
-        <div
-            style={{
-                position: 'absolute',
-                left: `${x}px`,
-                top: `${y}px`,
-                width: `${w}px`,
-                height: `${h}px`,
-                transform: `rotate(${angle}rad)`,
-                backgroundColor: 'white',
-                border: '1px solid black',
-                transformOrigin: 'center center'
-            }}
-        ></div>
-    );
-};
-
-export default Box;
+    show(p) {
+        p.fill("white");
+        p.rect(this.x, this.y, this.w, this.h);
+    }
+}
