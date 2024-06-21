@@ -1,15 +1,38 @@
-import React, { useState, useRef } from 'react'
+import React, { useRef, useEffect } from 'react';
+import p5 from 'p5';
 import './App.css'
-import Ball from './components/Ball/Ball.jsx'
-import Goal from './components/Goal/Goal.jsx'
 
-function App() {
-  // const scene = useRef();
-  // const engine = useRef(Engine.create());
-  return (
-      <div>
-      </div>
-  )
+function sketch(p) {
+    p.setup = function() {
+        p.createCanvas(p.windowWidth, p.windowHeight);
+        p.background(0);
+        p.circle(200, 200, 200);
+    }
+
+    p.windowResized = function() {
+        p.resizeCanvas(p.windowWidth, p.windowHeight);
+    }
+
+    p.draw = function () {
+        // Drawing code goes here
+    }
 }
 
-export default App
+function App() {
+    const p5Container = useRef();
+
+    useEffect(() => {
+        const p5Instance = new p5(sketch, p5Container.current);
+
+        return() => {
+            p5Instance.remove();
+        }
+    }, []);
+
+    return (
+        <div ref={p5Container} className="container">
+        </div>
+    );
+}
+
+export default App;
