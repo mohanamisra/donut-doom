@@ -70,11 +70,12 @@ function sketch(p) {
             Matter.Body.setSpeed(ball.body, 0);
         }
 
-        // if(Collision.collides(ball.body, box.body))
-        //     console.log("HIT");
         for(let i = 0; i < boxes.length; i++) {
-            if(Collision.collides(ball.body, boxes[i].body))
+            if(Collision.collides(ball.body, boxes[i].body)) {
                 console.log("HIT ", i);
+                World.remove(engine.world, boxes[i].body);
+                boxes.splice(i, 1);
+            }
         }
     }
 }
