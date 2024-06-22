@@ -2,14 +2,11 @@ import React, { useRef, useEffect } from 'react';
 import p5 from 'p5';
 import Matter from 'matter-js'
 import './App.css'
-import Box from "./components/Box.jsx";
 import Ball from "./components/Ball.jsx";
 import Boundary from "./components/Boundary.jsx";
 
 let Engine = Matter.Engine;
 let World = Matter.World;
-let Bodies = Matter.Bodies;
-let Body = Matter.Body;
 let Mouse = Matter.Mouse;
 let MouseConstraint = Matter.MouseConstraint;
 let ground, box, ball, world, engine, mCon, leftWall, rightWall;
@@ -30,11 +27,10 @@ function sketch(p) {
         ground = new Boundary(p.width/2, p.height-10, p.width, 20, world);
         leftWall = new Boundary(10, p.height/2, 20, p.height, world);
         rightWall = new Boundary(p.width - 10, p.height/2, 20, p.height, world);
-        box = new Box(300, p.height - 100, 50, 75, world);
-        ball = new Ball(50, p.height - 100, 25, world)
+        ball = new Ball(50, p.height - 100, 25, world);
 
         World.add(world, [mCon,
-        ])
+        ]);
     }
 
     p.windowResized = function() {
@@ -47,8 +43,14 @@ function sketch(p) {
         rightWall.show(p);
         leftWall.show(p);
         ground.show(p);
-        box.show(p);
         ball.show(p);
+
+        if(ball.body.position.y < 0 || ball.body.position.y > p.height + 50 || ball.body.position.x < 0 || ball.body.position.x > p.width + 50) {
+            Matter.Body.setPosition(ball.body, {x: 50, y: p.height - 100});
+            Matter.Body.setAngle(ball.body, 0);
+            // Matter.Body.setVelocity(ball.body, {x: 0, y: 0});
+            Matter.Body.setSpeed(ball.body, 0);
+        }
     }
 }
 
