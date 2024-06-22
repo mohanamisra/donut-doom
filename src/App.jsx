@@ -7,7 +7,7 @@ import Boundary from "./components/Boundary.jsx";
 import Box from "./components/Box.jsx";
 
 let Engine = Matter.Engine;
-let World = Matter.World;
+let World = Matter.Composite;
 let Mouse = Matter.Mouse;
 let MouseConstraint = Matter.MouseConstraint;
 let Collision = Matter.Collision;
@@ -35,9 +35,13 @@ function sketch(p) {
         World.add(world, [mCon]);
     }
 
-    // setInterval(spawnBoxes, 1000);
+    setInterval(spawnBoxes, 1000);
 
     function spawnBoxes() {
+        if(boxes.length > 7) {
+            World.remove(engine.world, boxes[0].body);
+            boxes.splice(0, 1);
+        }
         let xLoc = Math.random() * p.width;
         let yLoc = Math.random() * ((p.height/2 - 20) + 20);
         boxes.push(new Box(xLoc, yLoc, 50, 50, world));
