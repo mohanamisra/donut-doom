@@ -72,6 +72,7 @@ function sketch(p) {
                 console.log("HIT ", i);
                 World.remove(engine.world, boxes[i].body);
                 boxes.splice(i, 1);
+                ball.reset(p);
             }
         }
     }
