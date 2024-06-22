@@ -72,6 +72,10 @@ function sketch(p) {
 
         // if(Collision.collides(ball.body, box.body))
         //     console.log("HIT");
+        for(let i = 0; i < boxes.length; i++) {
+            if(Collision.collides(ball.body, boxes[i].body))
+                console.log("HIT ", i);
+        }
     }
 }
 
