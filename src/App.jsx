@@ -64,10 +64,7 @@ function sketch(p) {
         }
 
         if(ball.body.position.y < 0 || ball.body.position.y > p.height + 50 || ball.body.position.x < 0 || ball.body.position.x > p.width + 50) {
-            Matter.Body.setPosition(ball.body, {x: p.width/2, y: p.height - 100});
-            Matter.Body.setAngle(ball.body, 0);
-            // Matter.Body.setVelocity(ball.body, {x: 0, y: 0});
-            Matter.Body.setSpeed(ball.body, 0);
+            ball.reset(p);
         }
 
         for(let i = 0; i < boxes.length; i++) {

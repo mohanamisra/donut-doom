@@ -19,4 +19,10 @@ export default class Ball {
         p.circle(0, 0, this.r);
         p.pop();
     }
+
+    reset(p) {
+        Matter.Body.setPosition(this.body, {x: p.width/2, y: p.height - 100});
+        Matter.Body.setAngle(this.body, 0);
+        Matter.Body.setSpeed(this.body, 0);
+    }
 }
