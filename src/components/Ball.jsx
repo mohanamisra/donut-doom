@@ -15,6 +15,7 @@ export default class Ball {
         p.rotate(angle);
         p.rectMode(p.CENTER);
         p.fill("white");
+        p.strokeWeight(0);
         p.circle(0, 0, this.r);
         p.pop();
     }
