@@ -27,7 +27,7 @@ function sketch(p) {
         ground = new Boundary(p.width/2, p.height-10, p.width, 20, world);
         leftWall = new Boundary(10, p.height/2, 20, p.height, world);
         rightWall = new Boundary(p.width - 10, p.height/2, 20, p.height, world);
-        ball = new Ball(50, p.height - 100, 25, world);
+        ball = new Ball(p.width/2, p.height - 100, 25, world);
 
         World.add(world, [mCon,
         ]);
@@ -46,7 +46,7 @@ function sketch(p) {
         ball.show(p);
 
         if(ball.body.position.y < 0 || ball.body.position.y > p.height + 50 || ball.body.position.x < 0 || ball.body.position.x > p.width + 50) {
-            Matter.Body.setPosition(ball.body, {x: 50, y: p.height - 100});
+            Matter.Body.setPosition(ball.body, {x: p.width/2, y: p.height - 100});
             Matter.Body.setAngle(ball.body, 0);
             // Matter.Body.setVelocity(ball.body, {x: 0, y: 0});
             Matter.Body.setSpeed(ball.body, 0);
