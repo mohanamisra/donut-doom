@@ -4,12 +4,14 @@ import Matter from 'matter-js'
 import './App.css'
 import Ball from "./components/Ball.jsx";
 import Boundary from "./components/Boundary.jsx";
+import Box from "./components/Box.jsx";
 
 let Engine = Matter.Engine;
 let World = Matter.World;
 let Mouse = Matter.Mouse;
 let MouseConstraint = Matter.MouseConstraint;
-let ground, box, ball, world, engine, mCon, leftWall, rightWall;
+let Collision = Matter.Collision;
+let ground, box, ball, world, engine, mCon, leftWall, rightWall, collision;
 
 function sketch(p) {
     p.setup = function() {
@@ -28,9 +30,9 @@ function sketch(p) {
         leftWall = new Boundary(10, p.height/2, 20, p.height, world);
         rightWall = new Boundary(p.width - 10, p.height/2, 20, p.height, world);
         ball = new Ball(p.width/2, p.height - 100, 25, world);
+        box = new Box(p.width/2, 100, 100, 100, world);
 
-        World.add(world, [mCon,
-        ]);
+        World.add(world, [mCon]);
     }
 
     p.windowResized = function() {
@@ -44,6 +46,7 @@ function sketch(p) {
         leftWall.show(p);
         ground.show(p);
         ball.show(p);
+        box.show(p);
 
         if(ball.body.position.y < 0 || ball.body.position.y > p.height + 50 || ball.body.position.x < 0 || ball.body.position.x > p.width + 50) {
             Matter.Body.setPosition(ball.body, {x: p.width/2, y: p.height - 100});
@@ -51,6 +54,9 @@ function sketch(p) {
             // Matter.Body.setVelocity(ball.body, {x: 0, y: 0});
             Matter.Body.setSpeed(ball.body, 0);
         }
+
+        if(Collision.collides(ball.body, box.body))
+            console.log("HIT");
     }
 }
 

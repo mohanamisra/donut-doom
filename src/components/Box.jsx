@@ -7,6 +7,7 @@ export default class Box {
         this.w = w;
         this.h = h;
         this.color = "rgba(255, 255, 255, 1";
+        this.body.isStatic = true;
     }
 
     show(p) {
