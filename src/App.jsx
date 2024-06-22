@@ -30,7 +30,7 @@ function sketch(p) {
         ground = new Boundary(p.width/2, p.height-10, p.width, 20, world);
         leftWall = new Boundary(10, p.height/2, 20, p.height, world);
         rightWall = new Boundary(p.width - 10, p.height/2, 20, p.height, world);
-        ball = new Ball(p.width/2, p.height - 100, 25, world);
+        ball = new Ball(p.width/2, p.height - 100, 30, world);
 
         World.add(world, [mCon]);
     }

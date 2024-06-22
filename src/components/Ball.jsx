@@ -24,5 +24,11 @@ export default class Ball {
         Matter.Body.setPosition(this.body, {x: p.width/2, y: p.height - 100});
         Matter.Body.setAngle(this.body, 0);
         Matter.Body.setSpeed(this.body, 0);
+        setTimeout(() => {
+            this.r = 0;
+            setTimeout(() => {
+                this.r = 30;
+            }, 1000);
+        }, 10);
     }
 }
