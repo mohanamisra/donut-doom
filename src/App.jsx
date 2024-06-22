@@ -11,7 +11,8 @@ let World = Matter.World;
 let Mouse = Matter.Mouse;
 let MouseConstraint = Matter.MouseConstraint;
 let Collision = Matter.Collision;
-let ground, box, ball, world, engine, mCon, leftWall, rightWall, collision;
+let ground, ball, world, engine, mCon, leftWall, rightWall, collision;
+let boxes = [];
 
 function sketch(p) {
     p.setup = function() {
@@ -30,9 +31,16 @@ function sketch(p) {
         leftWall = new Boundary(10, p.height/2, 20, p.height, world);
         rightWall = new Boundary(p.width - 10, p.height/2, 20, p.height, world);
         ball = new Ball(p.width/2, p.height - 100, 25, world);
-        box = new Box(p.width/2, 100, 100, 100, world);
 
         World.add(world, [mCon]);
+    }
+
+    // setInterval(spawnBoxes, 1000);
+
+    function spawnBoxes() {
+        let xLoc = Math.random() * p.width;
+        let yLoc = Math.random() * ((p.height/2 - 20) + 20);
+        boxes.push(new Box(xLoc, yLoc, 50, 50, world));
     }
 
     p.windowResized = function() {
@@ -46,7 +54,10 @@ function sketch(p) {
         leftWall.show(p);
         ground.show(p);
         ball.show(p);
-        box.show(p);
+
+        for(let i = 0; i < boxes.length; i++) {
+            boxes[i].show(p);
+        }
 
         if(ball.body.position.y < 0 || ball.body.position.y > p.height + 50 || ball.body.position.x < 0 || ball.body.position.x > p.width + 50) {
             Matter.Body.setPosition(ball.body, {x: p.width/2, y: p.height - 100});
@@ -55,8 +66,8 @@ function sketch(p) {
             Matter.Body.setSpeed(ball.body, 0);
         }
 
-        if(Collision.collides(ball.body, box.body))
-            console.log("HIT");
+        // if(Collision.collides(ball.body, box.body))
+        //     console.log("HIT");
     }
 }
 
