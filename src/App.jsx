@@ -19,7 +19,8 @@ let bgImage, monsterImage, ballImage;
 
 function sketch(p) {
     p.preload = function() {
-        bgImage = p.loadImage('https://placehold.co/600x400.png');
+        bgImage = new Image();
+        bgImage.src = "assets/images/background.webp"
     }
 
     p.setup = function() {
@@ -59,7 +60,7 @@ function sketch(p) {
     }
 
     p.draw = function () {
-        p.background(bgImage);
+        p.background(51);
         Engine.update(engine);
         rightWall.show(p);
         leftWall.show(p);
