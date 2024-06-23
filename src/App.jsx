@@ -5,6 +5,7 @@ import './App.css'
 import Ball from "./components/Ball.jsx";
 import Boundary from "./components/Boundary.jsx";
 import Box from "./components/Box.jsx";
+import bg from "./assets/images/background.webp"
 
 let Engine = Matter.Engine;
 let World = Matter.Composite;
@@ -19,8 +20,7 @@ let bgImage, monsterImage, ballImage;
 
 function sketch(p) {
     p.preload = function() {
-        bgImage = new Image();
-        bgImage.src = "assets/images/background.webp"
+        bgImage = p.loadImage(bg);
     }
 
     p.setup = function() {
@@ -60,7 +60,7 @@ function sketch(p) {
     }
 
     p.draw = function () {
-        p.background(51);
+        p.background(bgImage);
         Engine.update(engine);
         rightWall.show(p);
         leftWall.show(p);
