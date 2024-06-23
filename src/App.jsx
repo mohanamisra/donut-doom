@@ -13,6 +13,7 @@ let MouseConstraint = Matter.MouseConstraint;
 let Collision = Matter.Collision;
 let ground, ball, world, engine, mCon, leftWall, rightWall, collision;
 let boxes = [];
+let score = 0;
 
 function sketch(p) {
     p.setup = function() {
@@ -35,7 +36,7 @@ function sketch(p) {
         World.add(world, [mCon]);
     }
 
-    setInterval(spawnBoxes, 1000);
+    setInterval(spawnBoxes, 1500);
 
     function spawnBoxes() {
         if(boxes.length > 7) {
@@ -43,7 +44,8 @@ function sketch(p) {
             boxes.splice(0, 1);
         }
         let xLoc = Math.random() * p.width;
-        let yLoc = Math.random() * ((p.height/2 - 20) + 20);
+        let yLoc = Math.random() * (p.height/2 - 100) + 100;
+        console.log(yLoc);
         boxes.push(new Box(xLoc, yLoc, 50, 50, world));
     }
 
@@ -58,6 +60,9 @@ function sketch(p) {
         leftWall.show(p);
         ground.show(p);
         ball.show(p);
+        p.textSize(32);
+        p.fill("white");
+        p.text(`Score: ${score}`, 50, 50);
 
         for(let i = 0; i < boxes.length; i++) {
             boxes[i].show(p);
@@ -73,6 +78,7 @@ function sketch(p) {
                 World.remove(engine.world, boxes[i].body);
                 boxes.splice(i, 1);
                 ball.reset(p);
+                score += 5;
             }
         }
     }
