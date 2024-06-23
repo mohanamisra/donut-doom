@@ -5,7 +5,9 @@ import './App.css'
 import Ball from "./components/Ball.jsx";
 import Boundary from "./components/Boundary.jsx";
 import Box from "./components/Box.jsx";
-import bg from "./assets/images/background.webp"
+import bg from "./assets/images/background.webp";
+import candy from "./assets/images/candy.webp";
+
 
 let Engine = Matter.Engine;
 let World = Matter.Composite;
@@ -21,6 +23,7 @@ let bgImage, monsterImage, ballImage;
 function sketch(p) {
     p.preload = function() {
         bgImage = p.loadImage(bg);
+        ballImage = p.loadImage(candy);
     }
 
     p.setup = function() {
@@ -38,7 +41,7 @@ function sketch(p) {
         ground = new Boundary(p.width/2, p.height-10, p.width, 20, world);
         leftWall = new Boundary(10, p.height/2, 20, p.height, world);
         rightWall = new Boundary(p.width - 10, p.height/2, 20, p.height, world);
-        ball = new Ball(p.width/2, p.height - 100, 30, world);
+        ball = new Ball(p.width/2, p.height - 100, 45, world);
 
         World.add(world, [mCon]);
     }
@@ -65,7 +68,7 @@ function sketch(p) {
         rightWall.show(p);
         leftWall.show(p);
         ground.show(p);
-        ball.show(p);
+        ball.show(p, ballImage);
         p.textSize(32);
         p.fill("white");
         p.text(`Score: ${score}`, 50, 50);

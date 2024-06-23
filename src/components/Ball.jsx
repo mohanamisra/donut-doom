@@ -7,16 +7,14 @@ export default class Ball {
         this.r = r;
     }
 
-    show(p) {
+    show(p, ballImage) {
         const pos = this.body.position;
         const angle = this.body.angle;
         p.push();
         p.translate(pos.x, pos.y);
         p.rotate(angle);
-        p.fill("white");
-        p.rectMode(p.CENTER);
-        p.strokeWeight(0);
-        p.circle(0, 0, this.r);
+        p.imageMode(p.CENTER);
+        p.image(ballImage, 0, 0, this.r*2, this.r*2);
         p.pop();
     }
 
@@ -24,10 +22,11 @@ export default class Ball {
         Matter.Body.setPosition(this.body, {x: p.width/2, y: p.height - 100});
         Matter.Body.setAngle(this.body, 0);
         Matter.Body.setSpeed(this.body, 0);
+        const originalRadius = this.r;
         setTimeout(() => {
-            this.r = 0;
+            this.r = 0.0001;
             setTimeout(() => {
-                this.r = 30;
+                this.r = originalRadius;
             }, 1000);
         }, 10);
     }
