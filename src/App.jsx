@@ -7,6 +7,11 @@ import Boundary from "./components/Boundary.jsx";
 import Box from "./components/Box.jsx";
 import bg from "./assets/images/background.webp";
 import candy from "./assets/images/candy.webp";
+import skull from "./assets/images/skull.webp";
+import ghost from "./assets/images/ghost.webp";
+import zombie from "./assets/images/zombie.webp";
+import goblin from "./assets/images/goblin.webp";
+import vampire from "./assets/images/vampire.webp";
 
 
 let Engine = Matter.Engine;
@@ -18,12 +23,24 @@ let ground, ball, world, engine, mCon, leftWall, rightWall, collision;
 let boxes = [];
 let score = 0;
 let timer = 42;
-let bgImage, monsterImage, ballImage;
+let bgImage, ballImage, skullImage, ghostImage, zombieImage, goblinImage, vampireImage;
+let monsterImages = [];
 
 function sketch(p) {
-    p.preload = function() {
+    p.preload = async function() {
         bgImage = p.loadImage(bg);
         ballImage = p.loadImage(candy);
+        // skullImage = p.loadImage(skull);
+        // ghostImage = p.loadImage(ghost);
+        // zombieImage = p.loadImage(zombie);
+        // goblinImage = p.loadImage(goblin);
+        // vampireImage = p.loadImage(vampire);
+        console.log(ballImage);
+        monsterImages.push(await p.loadImage(skull));
+        monsterImages.push(await p.loadImage(ghost));
+        monsterImages.push(await p.loadImage(zombie));
+        monsterImages.push(await p.loadImage(goblin));
+        monsterImages.push(await p.loadImage(vampire));
     }
 
     p.setup = function() {
@@ -74,7 +91,7 @@ function sketch(p) {
         p.text(`Score: ${score}`, 50, 50);
 
         for(let i = 0; i < boxes.length; i++) {
-            boxes[i].show(p);
+            boxes[i].show(p, monsterImages[0]);
         }
 
         if(ball.body.position.y < 0 || ball.body.position.y > p.height + 50 || ball.body.position.x < 0 || ball.body.position.x > p.width + 50) {
