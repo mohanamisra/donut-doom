@@ -14,8 +14,14 @@ let Collision = Matter.Collision;
 let ground, ball, world, engine, mCon, leftWall, rightWall, collision;
 let boxes = [];
 let score = 0;
+let timer = 42;
+let bgImage, monsterImage, ballImage;
 
 function sketch(p) {
+    p.preload = function() {
+        bgImage = p.loadImage('https://placehold.co/600x400.png');
+    }
+
     p.setup = function() {
         const canvas = p.createCanvas(p.windowWidth, p.windowHeight);
         engine = Engine.create();
@@ -45,7 +51,6 @@ function sketch(p) {
         }
         let xLoc = Math.random() * p.width;
         let yLoc = Math.random() * (p.height/2 - 100) + 100;
-        console.log(yLoc);
         boxes.push(new Box(xLoc, yLoc, 50, 50, world));
     }
 
@@ -54,7 +59,7 @@ function sketch(p) {
     }
 
     p.draw = function () {
-        p.background(51);
+        p.background(bgImage);
         Engine.update(engine);
         rightWall.show(p);
         leftWall.show(p);
@@ -96,8 +101,10 @@ function App() {
     }, []);
 
     return (
-        <div ref={p5Container} className="container">
-        </div>
+        <>
+            <div ref={p5Container} className="container">
+            </div>
+        </>
     );
 }
 
