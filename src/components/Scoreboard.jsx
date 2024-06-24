@@ -20,8 +20,9 @@ export default class Scoreboard {
         p.rotate(angle);
         p.image(this.boardImage, 0, 0, this.w, this.h);
         p.fill("white");
-        p.textSize(32);
-        p.text(`Score: ${score}`, this.x + this.w/4, this.y + 10, this.w, this.h);
+        p.textSize(40);
+        p.textFont('Pixelify Sans Variable');
+        p.text(`Points: ${score}`, this.x + this.w/4, this.y + 10, this.w, this.h);
         p.pop();
     }
 }

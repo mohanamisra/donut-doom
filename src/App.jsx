@@ -14,6 +14,7 @@ import zombie from "./assets/images/zombie.webp";
 import goblin from "./assets/images/goblin.webp";
 import vampire from "./assets/images/vampire.webp";
 import scoreboard from "./assets/images/scoreboard.webp";
+import '@fontsource-variable/pixelify-sans';
 
 
 let Engine = Matter.Engine;
@@ -28,6 +29,7 @@ let timer = 42;
 let bgImage, ballImage, scoreboardImage;
 let monsterImages = [];
 let imgIndex = 0;
+let myFont;
 
 function sketch(p) {
     p.preload = async function() {
