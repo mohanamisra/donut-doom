@@ -58,7 +58,7 @@ function sketch(p) {
         ground = new Boundary(p.width/2, p.height-10, p.width, 20, world);
         leftWall = new Boundary(10, p.height/2, 20, p.height, world);
         rightWall = new Boundary(p.width - 10, p.height/2, 20, p.height, world);
-        ball = new Ball(p.width/2, p.height - 100, 45, world);
+        ball = new Ball(p.width/2, p.height - 100, 40, world);
 
         World.add(world, [mCon]);
     }
@@ -72,8 +72,7 @@ function sketch(p) {
         }
         let xLoc = Math.random() * p.width;
         let yLoc = Math.random() * (p.height/2 - 100) + 100;
-        let boxImage = monsterImages[imgIndex];
-        boxes.push(new Box(xLoc, yLoc, 50, 50, world, monsterImages[imgIndex]));
+        boxes.push(new Box(xLoc, yLoc, 90, 90, world, monsterImages[imgIndex]));
         imgIndex = (imgIndex + 1) % monsterImages.length;
     }
 
