@@ -65,22 +65,48 @@ function sketch(p) {
         World.add(world, [mCon]);
     }
 
-    setInterval(spawnBoxes, 1500);
+    setInterval(spawnBoxes, 500);
 
     function spawnBoxes() {
         if(boxes.length > 7) {
             World.remove(engine.world, boxes[0].body);
             boxes.splice(0, 1);
         }
-        let xLoc = Math.random() * p.width;
-        let yLoc = Math.random() * (p.height/2 - 100) + 100;
+        let xLoc = p.random(0, p.width);
+        let yLoc = p.random(100, p.height/2 + 100);
+        let boxWidth, boxHeight;
+        let overlapping = false;
         if(imgIndex === 3 || imgIndex === 4) {
-            boxes.push(new Box(xLoc, yLoc, 105, 85, world, monsterImages[imgIndex]));
+            boxWidth = 105;
+            boxHeight = 85;
         }
         else {
-            boxes.push(new Box(xLoc, yLoc, 80, 85, world, monsterImages[imgIndex]));
+            boxWidth = 80;
+            boxHeight = 85;
         }
-        imgIndex = (imgIndex + 1) % monsterImages.length;
+        let boxToPush = {
+            x: xLoc,
+            y: yLoc,
+            w: boxWidth,
+            h: boxHeight,
+            world: world,
+            img: monsterImages[imgIndex],
+        }
+
+        for(let j = 0; j < boxes.length; j++) {
+            let boxToCheckAgainst = boxes[j];
+            let distance = p.dist(boxToPush.x, boxToPush.y ,boxToCheckAgainst.x, boxToCheckAgainst.y);
+            if(distance < boxToPush.w + boxToCheckAgainst.w - 80
+            || distance < boxToPush.h + boxToCheckAgainst.h - 80) {
+                overlapping = true;
+                break;
+            }
+        }
+        if(!overlapping) {
+            boxes.push(new Box(boxToPush));
+            imgIndex = (imgIndex + 1) % monsterImages.length;
+        }
+
     }
 
     p.windowResized = function() {
