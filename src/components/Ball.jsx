@@ -24,10 +24,10 @@ export default class Ball {
         Matter.Body.setSpeed(this.body, 0);
         const originalRadius = this.r;
         setTimeout(() => {
-            this.r = 0.0001;
+            this.r = 0.00001;
             setTimeout(() => {
                 this.r = originalRadius;
-            }, 1000);
-        }, 10);
+            }, 300);
+        }, 0);
     }
 }

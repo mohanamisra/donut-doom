@@ -95,9 +95,6 @@ function sketch(p) {
         ground.show(p);
         ball.show(p, ballImage);
         scoreBoard.show(p, score);
-        // p.textSize(32);
-        // p.fill("white");
-        // p.text(`Score: ${score}`, 50, 50);
 
         for(let i = 0; i < boxes.length; i++) {
             boxes[i].show(p);
@@ -113,7 +110,7 @@ function sketch(p) {
                 World.remove(engine.world, boxes[i].body);
                 boxes.splice(i, 1);
                 ball.reset(p);
-                score += 5;
+                score += 1;
             }
         }
     }

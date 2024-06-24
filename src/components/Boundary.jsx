@@ -8,7 +8,7 @@ export default class Boundary {
         this.body.isStatic = true;
         this.color = "rgba(255, 0, 0, 0)";
         this.body.restitution = 0.85;
-        this.body.friction = 0.05;
+        this.body.friction = 0.09;
     }
     async show(p) {
         const pos = this.body.position;
