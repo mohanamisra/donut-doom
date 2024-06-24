@@ -12,7 +12,7 @@ export default class Scoreboard {
         this.body.isStatic = true;
     }
 
-    async show(p, score ) {
+    async show(p, score, time ) {
         const pos = this.body.position;
         const angle = this.body.angle;
         p.push();
@@ -23,7 +23,9 @@ export default class Scoreboard {
         p.textSize(40);
         p.textStyle(p.BOLD);
         p.textFont('Pixelify Sans Variable');
-        p.text(`Hits: ${score}`, this.x + this.w/4, this.y + 10, this.w, this.h);
+        p.text(`Hits: ${score}`, this.x + 10, this.y + 10, this.w, this.h);
+        // p.textAlign(p.RIGHT);
+        p.text(`Time: ${time}`, this.w - 170 , this.y + 10, this.w, this.h);
         p.pop();
     }
 }

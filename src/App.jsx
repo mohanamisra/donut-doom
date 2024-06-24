@@ -94,7 +94,10 @@ function sketch(p) {
         leftWall.show(p);
         ground.show(p);
         ball.show(p, ballImage);
-        scoreBoard.show(p, score);
+        if(p.frameCount % 60 === 0 && timer > 0) {
+            timer--;
+        }
+        scoreBoard.show(p, score, timer);
 
         for(let i = 0; i < boxes.length; i++) {
             boxes[i].show(p);
