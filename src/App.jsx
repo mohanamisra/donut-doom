@@ -35,7 +35,6 @@ function sketch(p) {
         // zombieImage = p.loadImage(zombie);
         // goblinImage = p.loadImage(goblin);
         // vampireImage = p.loadImage(vampire);
-        console.log(ballImage);
         monsterImages.push(await p.loadImage(skull));
         monsterImages.push(await p.loadImage(ghost));
         monsterImages.push(await p.loadImage(zombie));
