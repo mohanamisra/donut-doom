@@ -5,6 +5,7 @@ import './App.css'
 import Ball from "./components/Ball.jsx";
 import Boundary from "./components/Boundary.jsx";
 import Box from "./components/Box.jsx";
+import Scoreboard from "./components/Scoreboard.jsx";
 import bg from "./assets/images/background.webp";
 import candy from "./assets/images/candy.webp";
 import skull from "./assets/images/skull.webp";
@@ -12,6 +13,7 @@ import ghost from "./assets/images/ghost.webp";
 import zombie from "./assets/images/zombie.webp";
 import goblin from "./assets/images/goblin.webp";
 import vampire from "./assets/images/vampire.webp";
+import scoreboard from "./assets/images/scoreboard.webp";
 
 
 let Engine = Matter.Engine;
@@ -19,11 +21,11 @@ let World = Matter.Composite;
 let Mouse = Matter.Mouse;
 let MouseConstraint = Matter.MouseConstraint;
 let Collision = Matter.Collision;
-let ground, ball, world, engine, mCon, leftWall, rightWall, collision;
+let ground, ball, world, engine, mCon, leftWall, rightWall, scoreBoard;
 let boxes = [];
 let score = 0;
 let timer = 42;
-let bgImage, ballImage, skullImage, ghostImage, zombieImage, goblinImage, vampireImage;
+let bgImage, ballImage, scoreboardImage;
 let monsterImages = [];
 let imgIndex = 0;
 
@@ -31,11 +33,7 @@ function sketch(p) {
     p.preload = async function() {
         bgImage = p.loadImage(bg);
         ballImage = p.loadImage(candy);
-        // skullImage = p.loadImage(skull);
-        // ghostImage = p.loadImage(ghost);
-        // zombieImage = p.loadImage(zombie);
-        // goblinImage = p.loadImage(goblin);
-        // vampireImage = p.loadImage(vampire);
+        scoreboardImage = p.loadImage(scoreboard);
         monsterImages.push(await p.loadImage(skull));
         monsterImages.push(await p.loadImage(ghost));
         monsterImages.push(await p.loadImage(zombie));
@@ -59,6 +57,8 @@ function sketch(p) {
         leftWall = new Boundary(10, p.height/2, 20, p.height, world);
         rightWall = new Boundary(p.width - 10, p.height/2, 20, p.height, world);
         ball = new Ball(p.width/2, p.height - 100, 40, world);
+        scoreBoard = new Scoreboard( 10, 10, p.width > 800 ? 400 : p.width - 30, 75, world, scoreboardImage);
+        console.log(p.width);
 
         World.add(world, [mCon]);
     }
@@ -92,9 +92,10 @@ function sketch(p) {
         leftWall.show(p);
         ground.show(p);
         ball.show(p, ballImage);
-        p.textSize(32);
-        p.fill("white");
-        p.text(`Score: ${score}`, 50, 50);
+        scoreBoard.show(p, score);
+        // p.textSize(32);
+        // p.fill("white");
+        // p.text(`Score: ${score}`, 50, 50);
 
         for(let i = 0; i < boxes.length; i++) {
             boxes[i].show(p);
