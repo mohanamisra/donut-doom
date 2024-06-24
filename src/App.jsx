@@ -72,7 +72,12 @@ function sketch(p) {
         }
         let xLoc = Math.random() * p.width;
         let yLoc = Math.random() * (p.height/2 - 100) + 100;
-        boxes.push(new Box(xLoc, yLoc, 90, 90, world, monsterImages[imgIndex]));
+        if(imgIndex === 3 || imgIndex === 4) {
+            boxes.push(new Box(xLoc, yLoc, 105, 85, world, monsterImages[imgIndex]));
+        }
+        else {
+            boxes.push(new Box(xLoc, yLoc, 80, 85, world, monsterImages[imgIndex]));
+        }
         imgIndex = (imgIndex + 1) % monsterImages.length;
     }
 
