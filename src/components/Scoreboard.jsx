@@ -21,6 +21,7 @@ export default class Scoreboard {
         p.image(this.boardImage, 0, 0, this.w, this.h);
         p.fill("white");
         p.textSize(40);
+        p.textStyle(p.BOLD);
         p.textFont('Pixelify Sans Variable');
         p.text(`Points: ${score}`, this.x + this.w/4, this.y + 10, this.w, this.h);
         p.pop();
