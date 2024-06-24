@@ -25,6 +25,7 @@ let score = 0;
 let timer = 42;
 let bgImage, ballImage, skullImage, ghostImage, zombieImage, goblinImage, vampireImage;
 let monsterImages = [];
+let imgIndex = 0;
 
 function sketch(p) {
     p.preload = async function() {
@@ -71,7 +72,9 @@ function sketch(p) {
         }
         let xLoc = Math.random() * p.width;
         let yLoc = Math.random() * (p.height/2 - 100) + 100;
-        boxes.push(new Box(xLoc, yLoc, 50, 50, world));
+        let boxImage = monsterImages[imgIndex];
+        boxes.push(new Box(xLoc, yLoc, 50, 50, world, monsterImages[imgIndex]));
+        imgIndex = (imgIndex + 1) % monsterImages.length;
     }
 
     p.windowResized = function() {
@@ -90,7 +93,7 @@ function sketch(p) {
         p.text(`Score: ${score}`, 50, 50);
 
         for(let i = 0; i < boxes.length; i++) {
-            boxes[i].show(p, monsterImages[0]);
+            boxes[i].show(p);
         }
 
         if(ball.body.position.y < 0 || ball.body.position.y > p.height + 50 || ball.body.position.x < 0 || ball.body.position.x > p.width + 50) {

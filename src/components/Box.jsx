@@ -8,18 +8,18 @@ export default class Box {
         this.y = y;
         this.w = w;
         this.h = h;
-        this.color = "rgba(255, 255, 255, 1";
+        this.boxImage = boxImage;
         this.body.isStatic = true;
     }
 
-    async show(p, boxImage) {
+    async show(p) {
         const pos = this.body.position;
         const angle = this.body.angle;
         p.push();
         p.translate(pos.x, pos.y);
         p.rotate(angle);
         p.imageMode(p.CENTER);
-        p.image(boxImage, 0, 0, this.w, this.h);
+        p.image(this.boxImage, 0, 0, this.w, this.h);
         p.pop();
     }
 }
