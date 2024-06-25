@@ -22,7 +22,7 @@ export default class Ball {
                 this.body.collisionFilter.mask = 1;
             }
             const angle = this.body.angle;
-            Matter.Body.setSpeed(this.body, Math.min(this.body.speed, 40));
+            // Matter.Body.setSpeed(this.body, Math.min(this.body.speed, 40));
             p.push();
             p.translate(pos.x, pos.y);
             p.rotate(angle);
