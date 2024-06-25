@@ -47,13 +47,14 @@ function sketch(p) {
         const canvas = p.createCanvas(p.windowWidth, p.windowHeight);
         engine = Engine.create();
         world = engine.world;
-
         const canvasMouse = Mouse.create(canvas.elt);
         canvasMouse.pixelRatio = p.pixelDensity();
         const options = {
             mouse: canvasMouse,
         }
+        console.log(canvasMouse);
         mCon = MouseConstraint.create(engine, options);
+        console.log(mCon);
 
         ground = new Boundary(p.width/2, p.height-10, p.width, 20, world);
         leftWall = new Boundary(10, p.height/2, 20, p.height, world);
