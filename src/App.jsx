@@ -61,7 +61,6 @@ function sketch(p) {
         scoreBoard = new Scoreboard( 10, 10, p.width > 800 ? 400 : p.width - 30, 75, world, scoreboardImage);
 
         const options = {
-            body: null,
             mouse: canvasMouse,
             collisionFilter: {
                 category: MOUSE_CATEGORY,
@@ -72,21 +71,18 @@ function sketch(p) {
 
 
         World.add(world, [mCon]);
-
-        // console.log(mCon);
-        // console.log(ball.body);
-        // console.log(canvasMouse);
-        // constraintOptions = {
-        //     bodyA: canvasMouse,
-        //     bodyB: ball.body,
-        //     stiffness: 0.75
-        // }
-        // constraint = Constraint.create(constraintOptions);
-        // World.add(world, constraint);
-        //
     }
 
-    // setInterval(spawnBoxes, 500);
+    setInterval(spawnBoxes, 500);
+
+    p.mouseDragged = function() {
+        if(p.mouseY > 600) {
+
+        } else {
+            ball.hide();
+            ball.reset(p);
+        }
+    }
 
     function spawnBoxes() {
         if(boxes.length > 7) {
@@ -127,15 +123,6 @@ function sketch(p) {
             boxes.push(new Box(boxToPush));
             imgIndex = (imgIndex + 1) % monsterImages.length;
         }
-
-        // if(p.mouseY > 600) {
-        //     mCon.body = ball.body;
-        //     ball.body.position.x = p.mouseX;
-        //     ball.body.position.y = p.mouseY;
-        // } else {
-        //     mCon.body = null;
-        // }
-
     }
 
 
