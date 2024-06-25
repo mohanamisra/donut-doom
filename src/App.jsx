@@ -74,18 +74,13 @@ function sketch(p) {
         World.add(world, [mCon]);
 
 
+        let violation;
         Matter.Events.on(engine, "afterUpdate", () => {
             if(p.mouseIsPressed && p.mouseY < 600 && ball.body.position.y < 600) {
                 console.log("out");
                 ball.body.position.y = Math.max(600, ball.body.position.y);
-                World.remove(engine.world, ball);
-                ball = new Ball(p.width/2, p.height - 100, 40, world, ballImage, BALL_CATEGORY);
-                // ball.body.speed = 0;
-                // Matter.Body.setAngle(ball.body, 0);
-                // Matter.Body.setVelocity(ball.body, { x: 0, y: 0 });
             }
         })
-
     }
 
     setInterval(spawnBoxes, 500);
