@@ -77,9 +77,9 @@ function sketch(p) {
 
         let violation;
         Matter.Events.on(engine, "afterUpdate", () => {
-            if(p.mouseIsPressed && p.mouseY < 0.6 * p.height && ball.body.position.y < 0.6 * p.height) {
+            if(p.mouseIsPressed && p.mouseY < 0.5 * p.height && ball.body.position.y < 0.5 * p.height) {
                 // ball.body.position.y = Math.max(600, ball.body.position.y);
-                Matter.Body.applyForce(ball.body, {x: ball.body.position.x, y: ball.body.position.y}, {x: 0, y: -100})
+                Matter.Body.applyForce(ball.body, {x: ball.body.position.x, y: ball.body.position.y}, {x: 0, y: -150})
             }
             Matter.Body.applyForce(ball.body, {x: ball.body.position.x, y: ball.body.position.y}, {x: 0, y: 0})
         })
@@ -103,7 +103,7 @@ function sketch(p) {
             boxes.splice(0, 1);
         }
         let xLoc = p.random(0, p.width);
-        let yLoc = p.random(100, p.height/2 + 100);
+        let yLoc = p.random(100, p.height/2);
         let boxWidth, boxHeight;
         let overlapping = false;
         if(imgIndex === 3 || imgIndex === 4) {
