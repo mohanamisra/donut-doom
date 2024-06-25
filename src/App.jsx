@@ -30,6 +30,7 @@ let bgImage, ballImage, scoreboardImage;
 let monsterImages = [];
 let imgIndex = 0;
 let myFont;
+let counter = -1;
 
 function sketch(p) {
     p.preload = async function() {
@@ -47,23 +48,26 @@ function sketch(p) {
         const canvas = p.createCanvas(p.windowWidth, p.windowHeight);
         engine = Engine.create();
         world = engine.world;
+        const canvasForMouse = {...canvas};
+        canvasForMouse.elt = <canvas id="defaultCanvas0" className="p5Canvas" width="1648" height="3660"
+                                     style="width: 412px; height: 915px;"></canvas>
+        console.log(canvas.elt);
+        console.log(canvasForMouse.elt);
         const canvasMouse = Mouse.create(canvas.elt);
         canvasMouse.pixelRatio = p.pixelDensity();
         const options = {
             mouse: canvasMouse,
         }
-        console.log(canvasMouse);
         mCon = MouseConstraint.create(engine, options);
-        console.log(mCon);
 
         ground = new Boundary(p.width/2, p.height-10, p.width, 20, world);
         leftWall = new Boundary(10, p.height/2, 20, p.height, world);
         rightWall = new Boundary(p.width - 10, p.height/2, 20, p.height, world);
-        ball = new Ball(p.width/2, p.height - 100, 40, world);
+        ball = new Ball(p.width/2, p.height - 100, 40, world, ballImage);
         scoreBoard = new Scoreboard( 10, 10, p.width > 800 ? 400 : p.width - 30, 75, world, scoreboardImage);
-        console.log(p.width);
 
         World.add(world, [mCon]);
+
     }
 
     setInterval(spawnBoxes, 500);
@@ -120,7 +124,7 @@ function sketch(p) {
         rightWall.show(p);
         leftWall.show(p);
         ground.show(p);
-        ball.show(p, ballImage);
+        ball.show(p);
         if(p.frameCount % 60 === 0 && timer > 0) {
             timer--;
         }
@@ -131,12 +135,13 @@ function sketch(p) {
         }
 
         if(ball.body.position.y < 0 || ball.body.position.y > p.height + 50 || ball.body.position.x < 0 || ball.body.position.x > p.width + 50) {
+            ball.hide();
             ball.reset(p);
         }
 
         for(let i = 0; i < boxes.length; i++) {
             if(Collision.collides(ball.body, boxes[i].body)) {
-                console.log("HIT ", i);
+                ball.hide();
                 World.remove(engine.world, boxes[i].body);
                 boxes.splice(i, 1);
                 ball.reset(p);
