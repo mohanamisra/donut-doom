@@ -2,8 +2,13 @@ import Box from "./Box.jsx";
 import Matter from "matter-js";
 
 export default class Boundary {
-    constructor(x, y, w, h, world) {
-        this.body = Matter.Bodies.rectangle(x,  y, w, h);
+    constructor(x, y, w, h, world, collisionCategory) {
+        this.body = Matter.Bodies.rectangle(x,  y, w, h, {
+            collisionFilter: {
+                category: collisionCategory,
+                mask: collisionCategory,
+            }
+        });
         Matter.World.add(world, this.body);
         this.body.isStatic = true;
         this.color = "rgba(255, 0, 0, 0)";

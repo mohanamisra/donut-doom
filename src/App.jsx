@@ -54,9 +54,9 @@ function sketch(p) {
         const canvasMouse = Mouse.create(canvas.elt);
         canvasMouse.pixelRatio = p.pixelDensity();
 
-        ground = new Boundary(p.width/2, p.height-10, p.width, 20, world);
-        leftWall = new Boundary(10, p.height/2, 20, p.height, world);
-        rightWall = new Boundary(p.width - 10, p.height/2, 20, p.height, world);
+        ground = new Boundary(p.width/2, p.height-10, p.width, 20, world, BALL_CATEGORY);
+        leftWall = new Boundary(10, p.height/2, 20, p.height, world, BALL_CATEGORY);
+        rightWall = new Boundary(p.width - 10, p.height/2, 20, p.height, world, BALL_CATEGORY);
         ball = new Ball(p.width/2, p.height - 100, 40, world, ballImage, BALL_CATEGORY);
         scoreBoard = new Scoreboard( 10, 10, p.width > 800 ? 400 : p.width - 30, 75, world, scoreboardImage);
 
@@ -69,19 +69,33 @@ function sketch(p) {
         }
         mCon = MouseConstraint.create(engine, options);
 
+        console.log(ball);
 
         World.add(world, [mCon]);
+
+
+        Matter.Events.on(engine, "afterUpdate", () => {
+            if(p.mouseIsPressed && p.mouseY < 600 && ball.body.position.y < 600) {
+                console.log("out");
+                ball.body.position.y = Math.max(600, ball.body.position.y);
+                ball.body.speed = 0;
+                Matter.Body.setAngle(ball.body, 0);
+                Matter.Body.setVelocity(ball.body, { x: 0, y: 0 });
+            }
+        })
+
     }
 
     setInterval(spawnBoxes, 500);
 
-    p.mouseDragged = function() {
-        if(p.mouseY > 600) {
+    let isDragged = false;
 
-        } else {
-            ball.hide();
-            ball.reset(p);
-        }
+    p.mouseDragged = function() {
+        console.log("drag");
+    }
+
+    p.mouseReleased = function() {
+        console.log("done");
     }
 
     function spawnBoxes() {
@@ -133,6 +147,7 @@ function sketch(p) {
     p.draw = function () {
         p.background(bgImage);
         Engine.update(engine);
+
         rightWall.show(p);
         leftWall.show(p);
         ground.show(p);
