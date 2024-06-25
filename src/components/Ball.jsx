@@ -1,8 +1,13 @@
 import Matter from 'matter-js'
 
 export default class Ball {
-    constructor(x, y, r, world, ballImage) {
-        this.body = Matter.Bodies.circle(x, y, r);
+    constructor(x, y, r, world, ballImage, collisionCategory) {
+        this.body = Matter.Bodies.circle(x, y, r, {
+            collisionFilter: {
+                category: 0b0001,
+                mask: 0b0011,
+            }
+        });
         Matter.World.add(world, this.body);
         this.world = world;
         this.r = r;
@@ -13,6 +18,14 @@ export default class Ball {
     show(p) {
         if(this.visible) {
             const pos = this.body.position;
+            if(pos.y > 600) {
+                // this.body.collisionFilter.group = 1;
+                // console.log(this.body.collisionFilter.group);
+            }
+            else {
+                // this.body.collisionFilter.group = -1;
+                // console.log(this.body.collisionFilter.group);
+            }
             const angle = this.body.angle;
             Matter.Body.setSpeed(this.body, Math.min(this.body.speed, 40));
             p.push();

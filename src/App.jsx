@@ -32,6 +32,9 @@ let imgIndex = 0;
 let myFont;
 let counter = -1;
 
+const BALL_CATEGORY = 0b0001;
+const MOUSE_CATEGORY = 0b0010;
+
 function sketch(p) {
     p.preload = async function() {
         bgImage = p.loadImage(bg);
@@ -57,6 +60,10 @@ function sketch(p) {
                     visible: false
                 },
                 stiffness: 0.2
+            },
+            collisionFilter: {
+                category: 0b0010,
+                mask: 0b0010 | 0b0001,
             }
         }
         mCon = MouseConstraint.create(engine, options);
@@ -64,10 +71,12 @@ function sketch(p) {
         ground = new Boundary(p.width/2, p.height-10, p.width, 20, world);
         leftWall = new Boundary(10, p.height/2, 20, p.height, world);
         rightWall = new Boundary(p.width - 10, p.height/2, 20, p.height, world);
-        ball = new Ball(p.width/2, p.height - 100, 40, world, ballImage);
+        ball = new Ball(p.width/2, p.height - 100, 40, world, ballImage, BALL_CATEGORY);
         scoreBoard = new Scoreboard( 10, 10, p.width > 800 ? 400 : p.width - 30, 75, world, scoreboardImage);
+        console.log(ball.body);
 
         World.add(world, [mCon]);
+        console.log(mCon.drag);
 
     }
 
@@ -115,18 +124,13 @@ function sketch(p) {
 
     }
 
+
     p.windowResized = function() {
         p.resizeCanvas(p.windowWidth, p.windowHeight);
     }
 
-    p.mouseDragged = function() {
-        if(p.mouseY > p.windowHeight / 1.2) {
-            console.log(p.mouseY);
-        }
-        else {
-            console.log("OUT");
-        }
-    }
+    console.log(ball);
+    console.log()
 
     p.draw = function () {
         p.background(bgImage);
