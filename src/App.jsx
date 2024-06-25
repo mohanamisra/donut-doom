@@ -48,15 +48,16 @@ function sketch(p) {
         const canvas = p.createCanvas(p.windowWidth, p.windowHeight);
         engine = Engine.create();
         world = engine.world;
-        const canvasForMouse = {...canvas};
-        canvasForMouse.elt = <canvas id="defaultCanvas0" className="p5Canvas" width="1648" height="3660"
-                                     style="width: 412px; height: 915px;"></canvas>
-        console.log(canvas.elt);
-        console.log(canvasForMouse.elt);
         const canvasMouse = Mouse.create(canvas.elt);
         canvasMouse.pixelRatio = p.pixelDensity();
         const options = {
             mouse: canvasMouse,
+            constraint: {
+                render: {
+                    visible: false
+                },
+                stiffness: 0.2
+            }
         }
         mCon = MouseConstraint.create(engine, options);
 
@@ -116,6 +117,15 @@ function sketch(p) {
 
     p.windowResized = function() {
         p.resizeCanvas(p.windowWidth, p.windowHeight);
+    }
+
+    p.mouseDragged = function() {
+        if(p.mouseY > p.windowHeight / 1.2) {
+            console.log(p.mouseY);
+        }
+        else {
+            console.log("OUT");
+        }
     }
 
     p.draw = function () {
