@@ -10,6 +10,7 @@ export default class Ball {
     show(p, ballImage) {
         const pos = this.body.position;
         const angle = this.body.angle;
+        Matter.Body.setSpeed(this.body, Math.min(this.body.speed, 40));
         p.push();
         p.translate(pos.x, pos.y);
         p.rotate(angle);
