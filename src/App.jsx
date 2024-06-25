@@ -22,6 +22,7 @@ let World = Matter.Composite;
 let Mouse = Matter.Mouse;
 let MouseConstraint = Matter.MouseConstraint;
 let Collision = Matter.Collision;
+let Constraint = Matter.Constraint;
 let ground, ball, world, engine, mCon, leftWall, rightWall, scoreBoard;
 let boxes = [];
 let score = 0;
@@ -29,8 +30,7 @@ let timer = 42;
 let bgImage, ballImage, scoreboardImage;
 let monsterImages = [];
 let imgIndex = 0;
-let myFont;
-let counter = -1;
+let constraint, constraintOptions;
 
 const BALL_CATEGORY = 0b0001;
 const MOUSE_CATEGORY = 0b0010;
@@ -53,34 +53,40 @@ function sketch(p) {
         world = engine.world;
         const canvasMouse = Mouse.create(canvas.elt);
         canvasMouse.pixelRatio = p.pixelDensity();
-        const options = {
-            mouse: canvasMouse,
-            constraint: {
-                render: {
-                    visible: false
-                },
-                stiffness: 0.2
-            },
-            collisionFilter: {
-                category: 0b0010,
-                mask: 0b0010 | 0b0001,
-            }
-        }
-        mCon = MouseConstraint.create(engine, options);
 
         ground = new Boundary(p.width/2, p.height-10, p.width, 20, world);
         leftWall = new Boundary(10, p.height/2, 20, p.height, world);
         rightWall = new Boundary(p.width - 10, p.height/2, 20, p.height, world);
         ball = new Ball(p.width/2, p.height - 100, 40, world, ballImage, BALL_CATEGORY);
         scoreBoard = new Scoreboard( 10, 10, p.width > 800 ? 400 : p.width - 30, 75, world, scoreboardImage);
-        console.log(ball.body);
+
+        const options = {
+            body: null,
+            mouse: canvasMouse,
+            collisionFilter: {
+                category: MOUSE_CATEGORY,
+                mask: 3,
+            }
+        }
+        mCon = MouseConstraint.create(engine, options);
+
 
         World.add(world, [mCon]);
-        console.log(mCon.drag);
 
+        // console.log(mCon);
+        // console.log(ball.body);
+        // console.log(canvasMouse);
+        // constraintOptions = {
+        //     bodyA: canvasMouse,
+        //     bodyB: ball.body,
+        //     stiffness: 0.75
+        // }
+        // constraint = Constraint.create(constraintOptions);
+        // World.add(world, constraint);
+        //
     }
 
-    setInterval(spawnBoxes, 500);
+    // setInterval(spawnBoxes, 500);
 
     function spawnBoxes() {
         if(boxes.length > 7) {
@@ -122,15 +128,20 @@ function sketch(p) {
             imgIndex = (imgIndex + 1) % monsterImages.length;
         }
 
+        // if(p.mouseY > 600) {
+        //     mCon.body = ball.body;
+        //     ball.body.position.x = p.mouseX;
+        //     ball.body.position.y = p.mouseY;
+        // } else {
+        //     mCon.body = null;
+        // }
+
     }
 
 
     p.windowResized = function() {
         p.resizeCanvas(p.windowWidth, p.windowHeight);
     }
-
-    console.log(ball);
-    console.log()
 
     p.draw = function () {
         p.background(bgImage);
