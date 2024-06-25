@@ -78,9 +78,11 @@ function sketch(p) {
             if(p.mouseIsPressed && p.mouseY < 600 && ball.body.position.y < 600) {
                 console.log("out");
                 ball.body.position.y = Math.max(600, ball.body.position.y);
-                ball.body.speed = 0;
-                Matter.Body.setAngle(ball.body, 0);
-                Matter.Body.setVelocity(ball.body, { x: 0, y: 0 });
+                World.remove(engine.world, ball);
+                ball = new Ball(p.width/2, p.height - 100, 40, world, ballImage, BALL_CATEGORY);
+                // ball.body.speed = 0;
+                // Matter.Body.setAngle(ball.body, 0);
+                // Matter.Body.setVelocity(ball.body, { x: 0, y: 0 });
             }
         })
 
@@ -88,15 +90,15 @@ function sketch(p) {
 
     setInterval(spawnBoxes, 500);
 
-    let isDragged = false;
-
-    p.mouseDragged = function() {
-        console.log("drag");
-    }
-
-    p.mouseReleased = function() {
-        console.log("done");
-    }
+    // let isDragged = false;
+    //
+    // p.mouseDragged = function() {
+    //     console.log("drag");
+    // }
+    //
+    // p.mouseReleased = function() {
+    //     console.log("done");
+    // }
 
     function spawnBoxes() {
         if(boxes.length > 7) {
