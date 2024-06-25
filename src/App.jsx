@@ -72,14 +72,16 @@ function sketch(p) {
         console.log(ball);
 
         World.add(world, [mCon]);
+        console.log(p.height)
 
 
         let violation;
         Matter.Events.on(engine, "afterUpdate", () => {
-            if(p.mouseIsPressed && p.mouseY < 600 && ball.body.position.y < 600) {
-                console.log("out");
-                ball.body.position.y = Math.max(600, ball.body.position.y);
+            if(p.mouseIsPressed && p.mouseY < 0.6 * p.height && ball.body.position.y < 0.6 * p.height) {
+                // ball.body.position.y = Math.max(600, ball.body.position.y);
+                Matter.Body.applyForce(ball.body, {x: ball.body.position.x, y: ball.body.position.y}, {x: 0, y: -100})
             }
+            Matter.Body.applyForce(ball.body, {x: ball.body.position.x, y: ball.body.position.y}, {x: 0, y: 0})
         })
     }
 
