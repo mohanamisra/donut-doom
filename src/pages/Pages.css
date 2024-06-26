@@ -95,3 +95,24 @@
     }
 
 }
+
+/*GAME PAGE GAME OVER BOARD STYLING*/
+
+.game-over-board {
+    position: absolute;
+    z-index: 100;
+
+    width: 320px;
+    max-width: 320px;
+    min-height: 100px;
+
+    background: #7c500b;
+}
+
+.invisible {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
