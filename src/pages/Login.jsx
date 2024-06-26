@@ -1,6 +1,11 @@
 import React, {useEffect, useState} from 'react';
+import Rules from "./Rules.jsx";
 import {auth, provider} from "../config.jsx";
 import {signInWithPopup} from "firebase/auth";
+
+import genBackground from "../assets/images/generalBackground.webp"
+import googleIcon from "../assets/images/googleIcon.webp"
+import './Pages.css'
 
 const Login = () => {
     const [value, setValue] = useState('');
@@ -20,9 +25,13 @@ const Login = () => {
 
     return (
         <div>
-            {value? console.log("But you are already logged in...") : null}
-            Welcome to Donut Doom!
-            <button onClick = {handleClick}>Login with Google</button>
+            {value? <Rules/>
+                :
+            <div className = "login-container">
+                Welcome to Donut Doom!
+                <button onClick = {handleClick}>Login with Google</button>
+            </div>
+            }
         </div>
     );
 };
