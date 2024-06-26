@@ -26,7 +26,7 @@
     align-items: center;
 }
 
-.text-container>.heading {
+.heading {
     font-size: 48px;
     font-weight: 700;
     text-align: center;
@@ -93,26 +93,28 @@
     .text-container {
         max-width: 800px;
     }
-
 }
 
-/*GAME PAGE GAME OVER BOARD STYLING*/
+/*GAME OVER PAGE STYLING*/
 
-.game-over-board {
-    position: absolute;
-    z-index: 100;
+.game-over-container {
+    min-height: 100vh;
+    background-image: url("../assets/images/background.webp");
+    background-size: cover;
 
-    width: 320px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: 'Pixelify Sans', monospace;
+}
+
+.leaderboard-container {
     max-width: 320px;
-    min-height: 100px;
-
     background: #7c500b;
-}
 
-.invisible {
-    display: none;
-}
-
-.visible {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

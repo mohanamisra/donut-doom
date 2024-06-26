@@ -19,7 +19,7 @@ export default class Scoreboard {
         p.translate(pos.x, pos.y);
         p.rotate(angle);
         p.image(this.boardImage, 0, 0, this.w, this.h);
-        p.fill("white");
+        p.fill("rgb(255, 255, 255)");
         p.textSize(40);
         p.textStyle(p.BOLD);
         p.textFont('Pixelify Sans Variable');
