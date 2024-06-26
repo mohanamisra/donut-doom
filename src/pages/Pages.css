@@ -53,7 +53,7 @@
     }
 }
 
-.login-button {
+.login-button, .logout-button, .play-game-button {
     border: none;
     outline: none;
     background: #210437;
@@ -71,7 +71,19 @@
     gap: 32px;
 }
 
-.login-button:hover {
+.logout-button {
+    background: #65431c;
+}
+
+.play-game-button {
+    font-family: 'Pixelify Sans', monospace;
+    font-size: 24px;
+    font-weight: 700;
+    min-height: 48px;
+    letter-spacing: 6px;
+}
+
+.login-button:hover, .logout-button:hover {
     background: white;
     color: #210437;
     font-weight: 700;
