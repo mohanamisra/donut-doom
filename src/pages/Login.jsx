@@ -28,8 +28,10 @@ const Login = () => {
             {value? <Rules/>
                 :
             <div className = "login-container">
-                Welcome to Donut Doom!
-                <button onClick = {handleClick}>Login with Google</button>
+                <div className="text-container">
+                    <p>Welcome To Donut Doom!</p>
+                    <button onClick={handleClick}>Login with Google</button>
+                </div>
             </div>
             }
         </div>

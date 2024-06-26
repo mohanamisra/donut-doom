@@ -1,1 +1,12 @@
 /*LOGIN PAGE STYLING*/
+.login-container {
+    background-image: url("../assets/images/a.webp");
+    background-color: black;
+    background-size: cover;
+    min-width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+
+    color: white;
+    font-family: 'Pixelify Sans', sans-serif;
+}
