@@ -9,4 +9,77 @@
 
     color: white;
     font-family: 'Pixelify Sans', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-container {
+    background-color: #7c500b;
+    max-width: 320px;
+    border-radius: 4px;
+    box-shadow: -10px 10px 0 0 rgba(255, 255, 255, 1);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-container>.heading {
+    font-size: 48px;
+    font-weight: 700;
+    text-align: center;
+    padding: 8px;
+}
+
+.text {
+    font-family: monospace;
+    font-size: 18px;
+    line-height: 1.5;
+    padding: 8px 16px 24px;
+}
+
+.donut-icon {
+    animation: donutMove 1s infinite;
+}
+
+@keyframes donutMove {
+    0%, 100% {
+        transform: rotate(15deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+}
+
+.login-button {
+    border: none;
+    outline: none;
+    background: #210437;
+    width: 100%;
+
+    font-size: 16px;
+    font-family: monospace;
+    padding: 8px;
+    border-radius: 4px;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+}
+
+.login-button:hover {
+    background: white;
+    color: #210437;
+    font-weight: 700;
+}
+
+@media (min-width: 1000px) {
+    .text-container {
+        max-width: 800px;
+    }
+
 }
