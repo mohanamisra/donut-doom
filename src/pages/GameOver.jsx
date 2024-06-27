@@ -17,11 +17,11 @@ const GameOver = () => {
                 const docSnap = await getDoc(docRef);
                 if(docSnap.exists()) {
                     if(location.state.score > docSnap.data().highscore) {
-                        console.log(user.uid);
                         await updateDoc(docRef, {
                             ...docSnap.data(),
                             highscore: location.state.score
-                        })
+                        });
+                        await fetchLeaderboardData();
                     }
                     setPlayer(
                         location.state.score > docSnap.data().highscore?
