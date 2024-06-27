@@ -17,6 +17,7 @@ import goblin from "../assets/images/goblin.webp";
 import vampire from "../assets/images/vampire.webp";
 import scoreboard from "../assets/images/scoreboard.webp";
 import bgMusic from "../assets/music/bgmusic.mp3";
+import hitMusic from "../assets/music/hit.mp3"
 import '@fontsource-variable/pixelify-sans';
 
 let Engine = Matter.Engine;
@@ -42,6 +43,8 @@ function Game() {
     const location = useLocation();
     const p5Container = useRef();
     const audioRef = useRef(new Audio(bgMusic));
+    const hitAudioRef = useRef(new Audio(hitMusic));
+    hitAudioRef.current.volume = 0.2;
     const [playing, setPlaying] = useState(false);
 
     function sketch(p) {
@@ -187,6 +190,7 @@ function Game() {
                         boxes.splice(i, 1);
                         ball.reset(p);
                         score += 1;
+                        hitAudioRef.current.play();
                     }
                 }
             }
