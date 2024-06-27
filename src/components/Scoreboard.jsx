@@ -21,6 +21,8 @@ export default class Scoreboard {
         p.image(this.boardImage, 0, 0, this.w, this.h);
         p.fill("rgb(255, 255, 255)");
         p.textSize(40);
+        if(p.windowWidth < 350)
+            p.textSize(28);
         p.textStyle(p.BOLD);
         p.textFont('Pixelify Sans Variable');
         p.text(`Hits: ${score}`, this.x + 10, this.y + 10, this.w, this.h);
