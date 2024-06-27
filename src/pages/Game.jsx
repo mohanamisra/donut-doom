@@ -50,8 +50,6 @@ function Game() {
             monsterImages.push(await p.loadImage(zombie));
             monsterImages.push(await p.loadImage(goblin));
             monsterImages.push(await p.loadImage(vampire));
-            score = 0;
-            timer = 42;
         }
 
         p.setup = function() {
@@ -178,7 +176,19 @@ function Game() {
             // }
         }
     }
-
+    (function()
+    {
+        if( window.localStorage )
+        {
+            if( !localStorage.getItem('firstLoad') )
+            {
+                localStorage['firstLoad'] = true;
+                window.location.reload();
+            }
+            else
+                localStorage.removeItem('firstLoad');
+        }
+    })();
 
     useEffect(() => {
         const p5Instance = new p5(sketch, p5Container.current);

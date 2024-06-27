@@ -8,7 +8,6 @@ const GameOver = () => {
 
     const handlePlayGame = () => {
         navigate("/game");
-        window.location.reload();
     }
 
     return (

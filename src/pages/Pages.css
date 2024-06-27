@@ -94,6 +94,12 @@
     }
 }
 
+/*GAME PAGE STYLING*/
+
+.container {
+    overflow: hidden;
+}
+
 /*GAME OVER PAGE STYLING*/
 
 .game-over-container {
