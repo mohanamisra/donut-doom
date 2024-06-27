@@ -51,7 +51,10 @@ const GameOver = () => {
     }, []);
 
     const handlePlayGame = () => {
-        navigate("/game");
+        if(location.state)
+            navigate("/game", {state: {loggedIn: true}});
+        else
+            navigate("/game");
     }
 
     return (
