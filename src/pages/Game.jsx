@@ -139,7 +139,7 @@ function Game() {
 
         p.draw = function () {
             p.background(bgImage);
-            if(location.state.loggedIn === true) {
+            if(location.state.loggedIn === true ) {
                 Engine.update(engine);
 
                 rightWall.show(p);
