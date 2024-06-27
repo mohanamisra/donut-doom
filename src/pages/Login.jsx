@@ -5,8 +5,8 @@ import {setDoc, getDoc, doc} from "firebase/firestore";
 import {useNavigate} from "react-router-dom";
 
 import bgMusic from "../assets/music/bgmusic.mp3"
-import audioOn from "../assets/images/audioon.webp"
 import audioOff from "../assets/images/audiooff.webp"
+import audioOn from "../assets/images/audioon.webp"
 import googleIcon from "../assets/images/googleIcon.webp"
 import './Pages.css'
 
