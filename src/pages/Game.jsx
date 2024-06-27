@@ -25,7 +25,7 @@ let Constraint = Matter.Constraint;
 let ground, ball, world, engine, mCon, leftWall, rightWall, scoreBoard;
 let boxes = [];
 let score = 0;
-let timer = 42;
+let timer = 10;
 let bgImage, ballImage, scoreboardImage;
 let monsterImages = [];
 let imgIndex = 0;

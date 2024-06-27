@@ -14,11 +14,16 @@ const Login = () => {
     const handleLogin = () => {
         signInWithPopup(auth, provider)
             .then((data) => {
-                console.log(data);
+                console.log(data.user.uid);
+                if(data.user) {
+
+                }
                 setValue(data.user.email);
                 localStorage.setItem("email", data.user.email);
             });
     }
+
+
 
     const handleLogout = () => {
         localStorage.clear();
