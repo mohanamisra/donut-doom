@@ -74,16 +74,14 @@ function Game() {
             }
             mCon = MouseConstraint.create(engine, options);
 
-            console.log(ball);
 
             World.add(world, [mCon]);
-            console.log(p.height)
+            console.log(p.height);
+            console.log(p.windowWidth);
 
 
-            let violation;
             Matter.Events.on(engine, "afterUpdate", () => {
                 if(p.mouseIsPressed && p.mouseY < 0.55 * p.height && ball.body.position.y < 0.55 * p.height) {
-                    // ball.body.position.y = Math.max(600, ball.body.position.y);
                     Matter.Body.applyForce(ball.body, {x: ball.body.position.x, y: ball.body.position.y}, {x: 0, y: -150})
                 }
                 Matter.Body.applyForce(ball.body, {x: ball.body.position.x, y: ball.body.position.y}, {x: 0, y: 0})
