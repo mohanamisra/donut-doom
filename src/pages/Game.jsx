@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useLocation} from 'react-router-dom';
 import p5 from 'p5';
 import Matter from 'matter-js'
 import Ball from "../components/Ball.jsx";
@@ -38,6 +38,7 @@ const MOUSE_CATEGORY = 0b0010;
 
 function Game() {
     const navigate = useNavigate();
+    const location = useLocation();
     const p5Container = useRef();
 
     function sketch(p) {
@@ -138,7 +139,7 @@ function Game() {
 
         p.draw = function () {
             p.background(bgImage);
-            // if(gameOver === false) {
+            if(location.state.loggedIn === true) {
                 Engine.update(engine);
 
                 rightWall.show(p);
@@ -173,7 +174,7 @@ function Game() {
                         score += 1;
                     }
                 }
-            // }
+            }
         }
     }
     (function()

@@ -44,7 +44,7 @@ const Login = () => {
     }
 
     const handlePlayGame = () => {
-        navigate("/game");
+        navigate("/game", {state: {loggedIn: true}});
     }
 
     const handleInputChange = (e) => {
