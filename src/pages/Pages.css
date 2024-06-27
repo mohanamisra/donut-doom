@@ -45,10 +45,10 @@
 
 @keyframes donutMove {
     0%, 100% {
-        transform: rotate(15deg);
+        transform: rotate(5deg);
     }
     50% {
-        transform: rotate(0deg);
+        transform: rotate(-15deg);
     }
 }
 

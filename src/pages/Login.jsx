@@ -1,10 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {auth, provider, db} from "../config.jsx";
 import {signInWithPopup} from "firebase/auth";
 import {setDoc, getDoc, doc} from "firebase/firestore";
 import {useNavigate} from "react-router-dom";
 
-import donutIcon from "../assets/images/donutIcon.webp"
+import bgMusic from "../assets/music/bgmusic.mp3"
+import audioOn from "../assets/images/audioon.webp"
+import audioOff from "../assets/images/audiooff.webp"
 import googleIcon from "../assets/images/googleIcon.webp"
 import './Pages.css'
 
@@ -14,6 +16,8 @@ const Login = () => {
     const [visible, setVisible] = useState(false);
     const [username, setUsername] = useState('');
     const [userID, setUserID] = useState('');
+    const [playing, setPlaying] = useState(false);
+    const audioRef = useRef(null);
 
     const handleLogin = () => {
         signInWithPopup(auth, provider)
@@ -30,12 +34,6 @@ const Login = () => {
                 setValue(data.user.email);
                 localStorage.setItem("email", data.user.email);
             });
-    }
-
-    const displayUsernameForm = () => {
-        return(<div className = "username-form">
-
-        </div>)
     }
 
     const handleLogout = () => {
@@ -67,35 +65,56 @@ const Login = () => {
         }
     }
 
+    const handleAudioClick = () => {
+        if (audioRef.current) {
+            if (!playing) {
+                audioRef.current.play();
+            } else {
+                audioRef.current.pause();
+            }
+            setPlaying(!playing);
+        }
+    }
 
     useEffect(() => {
         setValue(localStorage.getItem("email"));
+
+        if (!audioRef.current) {
+            audioRef.current = new Audio(bgMusic);
+            audioRef.current.loop = true;
+        }
+
+        return () => {
+            if (audioRef.current) {
+                audioRef.current.pause();
+                audioRef.current = null;
+            }
+        };
     }, [visible]);
 
     return (
-        <div className = "login-container">
+        <div className="login-container">
             {visible?
                 <div className="username-form">
-                    <p className = "heading">Wait a sec!</p>
-                    <p className = "text">Please enter your username first.</p>
-                    <input type = "text"
-                           placeholder = "Enter username..."
-                           value = {username}
+                    <p className="heading">Wait a sec!</p>
+                    <p className="text">Please enter your username first.</p>
+                    <input type="text"
+                           placeholder="Enter username..."
+                           value={username}
                            onChange={handleInputChange}
-                           className = "username-input"
+                           className="username-input"
                     />
                     <button className="set-username-button"
-                            onClick = {handleSetUsername}>Done
+                            onClick={handleSetUsername}>Done
                     </button>
                 </div>
-                :            <div className="text-container">
-                    <img src={donutIcon} alt = "donut icon" width="100px" className = "donut-icon"/>
+                : <div className="text-container">
+                    <img src={playing ? audioOn : audioOff} alt="donut icon" width="120px" className="donut-icon" onClick={handleAudioClick}/>
                     <p className="heading">Welcome To Donut Doom!</p>
                     <p className="text">You accidentally wandered into a cemetery late at night after
                         buying a box of those sweet, sweet donuts... <br/><strong>AND WOKE UP THE MONSTERS!</strong></p>
                     <p className="text">Quick! Toss the donuts at them to keep them distracted while you figure out how
-                        to get
-                        out of this sickeningly sweet nightmare!</p>
+                        to get out of this sickeningly sweet nightmare!</p>
                     {value? <>
                             <button className="play-game-button" onClick={handlePlayGame}>Play Game</button>
                             <button className="logout-button" onClick={handleLogout}>Logout</button>
