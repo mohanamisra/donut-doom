@@ -154,7 +154,7 @@
     font-family: 'Pixelify Sans', monospace;
 }
 
-.leaderboard-container {
+.stats-container {
     max-width: 320px;
     background: #7c500b;
 
@@ -162,4 +162,38 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    border-radius: 4px;
+    padding: 8px 4px;
+}
+
+.player-stats {
+    font-family: 'Pixelify Sans', monospace;
+    font-size: 26px;
+}
+
+.leaderboard-container {
+    background: #210437;
+    margin-bottom: 8px  ;
+    border-radius: 4px;
+}
+
+.col.heading {
+    font-size: 24px;
+}
+
+.leaderboard-container>.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.col {
+    font-family: monospace;
+    font-size: 20px;
+    padding: 0 8px;
+    margin: 6px 0;
+}
+
+.stats-container>.play-game-button {
+    background: #008700;
 }
