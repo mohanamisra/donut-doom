@@ -50,6 +50,8 @@ function Game() {
             monsterImages.push(await p.loadImage(zombie));
             monsterImages.push(await p.loadImage(goblin));
             monsterImages.push(await p.loadImage(vampire));
+            score = 0;
+            timer = 42;
         }
 
         p.setup = function() {
@@ -138,7 +140,7 @@ function Game() {
 
         p.draw = function () {
             p.background(bgImage);
-            if(gameOver === false) {
+            // if(gameOver === false) {
                 Engine.update(engine);
 
                 rightWall.show(p);
@@ -173,7 +175,7 @@ function Game() {
                         score += 1;
                     }
                 }
-            }
+            // }
         }
     }
 
