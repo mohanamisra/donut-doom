@@ -44,8 +44,8 @@ let Collision = Matter.Collision;
 
 let ground, ball, world, engine, mCon, leftWall, rightWall, scoreBoard, audioButton;
 let boxes = [];
-let score = 0;
-let timer = 42;
+let score;
+let timer;
 let bgImage, ballImage, scoreboardImage, audioOnImage, audioOffImage;
 let monsterImages = [];
 let imgIndex = 0;
@@ -67,6 +67,8 @@ function Game() {
     // navigate() and location() help in, well, navigation, specifically to the game over screen.
     const navigate = useNavigate();
     const location = useLocation();
+    score = 0;
+    timer = 42;
 
     // p5 and audio playing code.
     const p5Container = useRef();
