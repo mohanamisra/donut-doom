@@ -199,7 +199,7 @@ function Game() {
 
         // This makes the canvas responsive.
         p.windowResized = function () {
-            p.resizeCanvas(p.windowWidth, p.windowHeight + 100);
+            p.resizeCanvas(p.windowWidth, p.windowHeight);
         }
 
         // The code executed every frame, that is drawing on your screen typically 60 times a second.
