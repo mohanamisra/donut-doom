@@ -1,3 +1,9 @@
+// Basic component. Just accesses all kinds of data.
+// It gets your current score from the previous screen's state.
+// It receives your highscore and the leaderboard from Firebase.
+// The only tricky part was to update everything in time for your current score to reflect in
+// your highscore and even the leaderboard, *if* it was greater than your previous highscore.
+
 import React, {useEffect, useState} from 'react';
 import {useLocation, useNavigate} from 'react-router-dom';
 import {auth, db} from "../config.jsx"
@@ -42,7 +48,6 @@ const GameOver = () => {
             newLeaderboard.push(doc.data());
         })
         setLeaderboard(newLeaderboard);
-        console.log(newLeaderboard);
     }
 
     useEffect(() => {

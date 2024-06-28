@@ -1,3 +1,11 @@
+/*I typically do not endorse throwing in all your css in one file.
+However here, I didn't see the need for extensive css files for every page/component. A lot of the complex
+visual rendering was taken care of by p5.js, so I only needed to really style the typical react web app elements.
+That to me, didn't call for separate css files for everything.
+Typically though, you want to separate things into modules, functions, classes, files, etc whenever possible.
+
+Modular code is so much easier to maintain, and read!*/
+
 /*LOGIN PAGE STYLING*/
 .login-container {
     background-image: url("../assets/images/a.webp");

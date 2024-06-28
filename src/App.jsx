@@ -4,7 +4,10 @@ import Game from './pages/Game.jsx';
 import Login from './pages/Login.jsx';
 import GameOver from './pages/GameOver.jsx';
 
-import {Routes, Route, Navigate} from "react-router-dom";
+// The App component essentialy just tells the web application where to go if
+// certain things happen, are clicked, certain urls are accessed, etc
+
+import {Routes, Route} from "react-router-dom";
 
 const App = () => {
     return (

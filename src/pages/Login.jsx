@@ -1,3 +1,8 @@
+// This is a typical React login page.
+// Beyond just UI stuff which differs from project to project,
+// I have implemented only login via google.
+// That is secure, delegated to Firebase to manage, and takes away a lot of validation requirements from me.
+
 import React, {useEffect, useState, useRef} from 'react';
 import {auth, provider, db} from "../config.jsx";
 import {signInWithPopup} from "firebase/auth";
@@ -22,20 +27,23 @@ const Login = () => {
     const handleLogin = () => {
         signInWithPopup(auth, provider)
             .then(async(data) => {
-                console.log(data.user.uid);
                 if(data.user) {
                     let player = await getDoc(doc(db, "users", data.user.uid));
+
+                    // if the above player document doesn't exist in the database, that means this is the first time the player has ever logged in!
+                    // So we need them to enter a username, the component for which needs to be visible at this point.
                     if(!player._document) {
                         setUserID(data.user.uid);
-                        console.log("player data not detected");
                         setVisible(true);
                     }
                 }
                 setValue(data.user.email);
+                // So that the device remembers you have already logged in once!
                 localStorage.setItem("email", data.user.email);
             });
     }
 
+    // Basic logout functionality.
     const handleLogout = () => {
         localStorage.clear();
         window.location.reload();
@@ -45,15 +53,15 @@ const Login = () => {
         navigate("/game", {state: {loggedIn: true}});
     }
 
+    // newUsername because in React, you do not manipulate the state directly.
     const handleInputChange = (e) => {
         const newUsername = e.target.value;
         setUsername(newUsername);
     }
 
     const handleSetUsername = async() => {
-        console.log(userID);
-        console.log(username);
         if(username === "") {
+            // Error message
             alert("Invalid username!");
         }
         else {
@@ -61,10 +69,14 @@ const Login = () => {
                 username: username,
                 highscore: 0,
             });
+
+            // Done entering username? Cool.
+            // We now remove the component that accepted your username by setting its visibility to false.
             setVisible(false);
         }
     }
 
+    // Audio playing logic. Was surprisingly more finnicky than I expected, across the project.
     const handleAudioClick = () => {
         if (audioRef.current) {
             if (!playing) {
@@ -92,6 +104,7 @@ const Login = () => {
         };
     }, [visible]);
 
+    // Tons of conditional rendering below.
     return (
         <div className="login-container">
             {visible?
