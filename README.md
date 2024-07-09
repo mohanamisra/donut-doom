@@ -2,7 +2,10 @@
 
   ![welcome page](https://github.com/mohanamisra/donut-doom/assets/91205171/e6f9f6fa-31ca-4a13-8012-b6c101310254)
   
-  Demo: https://donutdoomarcade.web.app/
+### Demo: https://donutdoomarcade.web.app/  
+### Trailer:  Click to play
+[![trailer](https://img.youtube.com/vi/CIDIBR4iIxE/0.jpg)](https://youtube.com/watch/CIDIBR4iIxE?feature=share)
+
   
   No one asked you to wander through a cemetery at 3 AM. But here you are, all alone, with only a donut in your hand.  You hear something and you realise...the monsters are here!    
   
