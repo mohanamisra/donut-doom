@@ -6,7 +6,7 @@
 
 import React, {useEffect, useState} from 'react';
 import {useLocation, useNavigate} from 'react-router-dom';
-import {auth, db} from "../config.jsx"
+// import {auth, db} from "../config.jsx"
 import {doc, getDoc, getDocs, updateDoc, query, orderBy, limit, collection} from "firebase/firestore";
 import './Pages.css'
 
