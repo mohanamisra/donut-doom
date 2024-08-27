@@ -44,8 +44,8 @@ let Collision = Matter.Collision;
 
 let ground, ball, world, engine, mCon, leftWall, rightWall, scoreBoard, audioButton;
 let boxes = [];
-// let score;
-// let timer;
+let score = 0;
+let timer = 42;
 let bgImage, ballImage, scoreboardImage, audioOnImage, audioOffImage;
 let monsterImages = [];
 let imgIndex = 0;
@@ -67,8 +67,9 @@ function Game() {
     // navigate() and location() help in, well, navigation, specifically to the game over screen.
     const navigate = useNavigate();
     const location = useLocation();
-    // score = 0;
-    // timer = 42;
+
+    score = 0;
+    timer = 42;
 
     // p5 and audio playing code.
     const p5Container = useRef();
@@ -78,8 +79,8 @@ function Game() {
     // more code.
     hitAudioRef.current.volume = 0.2;
     const [playing, setPlaying] = useState(false);
-    const [score, setScore] = useState(0);
-    const [timer, setTimer] = useState(42);
+    // const [score, setScore] = useState(0);
+    // const [timer, setTimer] = useState(42);
 
     // This is a p5 function. It wraps up all of the p5 "stuff".
     function sketch(p) {
@@ -110,20 +111,20 @@ function Game() {
             canvasMouse.pixelRatio = p.pixelDensity();
 
             // audio playing logic.
-            audioButton = p.createImg(audioRef.current.paused ? audioOff : audioOn, "audio button");
-            audioButton.position(20, p.height - 50);
-            audioButton.size(30, 30);
-            audioButton.mouseClicked(() => {
-                if (audioRef.current.paused) {
-                    audioRef.current.play();
-                } else {
-                    audioRef.current.pause();
-                }
-                setPlaying(prevPlaying => !prevPlaying);
-                setTimeout(() => {
-                    audioButton.elt.src = audioRef.current.paused ? audioOff : audioOn;
-                }, 0);
-            });
+            // audioButton = p.createImg(audioRef.current.paused ? audioOff : audioOn, "audio button");
+            // audioButton.position(20, p.height - 50);
+            // audioButton.size(30, 30);
+            // audioButton.mouseClicked(() => {
+            //     if (audioRef.current.paused) {
+            //         audioRef.current.play();
+            //     } else {
+            //         audioRef.current.pause();
+            //     }
+            //     setPlaying(prevPlaying => !prevPlaying);
+            //     setTimeout(() => {
+            //         audioButton.elt.src = audioRef.current.paused ? audioOff : audioOn;
+            //     }, 0);
+            // });
 
             // Creating the components from the classes defined in "src/components/" folder.
             ground = new Boundary(p.width / 2, p.height - 10, p.width, 20, world, BALL_CATEGORY);
@@ -220,8 +221,7 @@ function Game() {
                 ground.show(p);
                 ball.show(p);
                 if (p.frameCount % 60 === 0 && timer > 0) {
-                    let newTimer = timer - 1;
-                    setTimer(newTimer);
+                    timer--;
                     if (timer === 0) {
                         gameOver = true;
                         navigate("/leaderboard", { state: { score: score } });
@@ -247,8 +247,7 @@ function Game() {
                         World.remove(engine.world, boxes[i].body);
                         boxes.splice(i, 1);
                         ball.reset(p);
-                        let newScore = score + 1;
-                        setScore(newScore);
+                        score++;
                         hitAudioRef.current.play();
                     }
                 }
