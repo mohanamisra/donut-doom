@@ -44,8 +44,8 @@ let Collision = Matter.Collision;
 
 let ground, ball, world, engine, mCon, leftWall, rightWall, scoreBoard, audioButton;
 let boxes = [];
-let score;
-let timer;
+// let score;
+// let timer;
 let bgImage, ballImage, scoreboardImage, audioOnImage, audioOffImage;
 let monsterImages = [];
 let imgIndex = 0;
@@ -67,8 +67,8 @@ function Game() {
     // navigate() and location() help in, well, navigation, specifically to the game over screen.
     const navigate = useNavigate();
     const location = useLocation();
-    score = 0;
-    timer = 42;
+    // score = 0;
+    // timer = 42;
 
     // p5 and audio playing code.
     const p5Container = useRef();
@@ -78,6 +78,8 @@ function Game() {
     // more code.
     hitAudioRef.current.volume = 0.2;
     const [playing, setPlaying] = useState(false);
+    const [score, setScore] = useState(0);
+    const [timer, setTimer] = useState(42);
 
     // This is a p5 function. It wraps up all of the p5 "stuff".
     function sketch(p) {
@@ -218,7 +220,8 @@ function Game() {
                 ground.show(p);
                 ball.show(p);
                 if (p.frameCount % 60 === 0 && timer > 0) {
-                    timer--;
+                    let newTimer = timer - 1;
+                    setTimer(newTimer);
                     if (timer === 0) {
                         gameOver = true;
                         navigate("/leaderboard", { state: { score: score } });
@@ -244,7 +247,8 @@ function Game() {
                         World.remove(engine.world, boxes[i].body);
                         boxes.splice(i, 1);
                         ball.reset(p);
-                        score += 1;
+                        let newScore = score + 1;
+                        setScore(newScore);
                         hitAudioRef.current.play();
                     }
                 }
