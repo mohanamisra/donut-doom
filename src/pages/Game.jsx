@@ -120,7 +120,7 @@ function Game() {
                 } else {
                     audioRef.current.pause();
                 }
-                setPlaying(prevPlaying => !prevPlaying);
+                // setPlaying(prevPlaying => !prevPlaying);
                 setTimeout(() => {
                     audioButton.elt.src = audioRef.current.paused ? audioOff : audioOn;
                 }, 0);
@@ -224,6 +224,8 @@ function Game() {
                     timer--;
                     if (timer === 0) {
                         gameOver = true;
+                        audioRef.current.pause();
+                        audioRef.current.currentTime = 0;
                         navigate("/leaderboard", { state: { score: score } });
                     }
                 }
