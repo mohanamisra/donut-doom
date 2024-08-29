@@ -111,20 +111,20 @@ function Game() {
             canvasMouse.pixelRatio = p.pixelDensity();
 
             // audio playing logic.
-            // audioButton = p.createImg(audioRef.current.paused ? audioOff : audioOn, "audio button");
-            // audioButton.position(20, p.height - 50);
-            // audioButton.size(30, 30);
-            // audioButton.mouseClicked(() => {
-            //     if (audioRef.current.paused) {
-            //         audioRef.current.play();
-            //     } else {
-            //         audioRef.current.pause();
-            //     }
-            //     setPlaying(prevPlaying => !prevPlaying);
-            //     setTimeout(() => {
-            //         audioButton.elt.src = audioRef.current.paused ? audioOff : audioOn;
-            //     }, 0);
-            // });
+            audioButton = p.createImg(audioRef.current.paused ? audioOff : audioOn, "audio button");
+            audioButton.position(20, p.height - 50);
+            audioButton.size(30, 30);
+            audioButton.mouseClicked(() => {
+                if (audioRef.current.paused) {
+                    audioRef.current.play();
+                } else {
+                    audioRef.current.pause();
+                }
+                setPlaying(prevPlaying => !prevPlaying);
+                setTimeout(() => {
+                    audioButton.elt.src = audioRef.current.paused ? audioOff : audioOn;
+                }, 0);
+            });
 
             // Creating the components from the classes defined in "src/components/" folder.
             ground = new Boundary(p.width / 2, p.height - 10, p.width, 20, world, BALL_CATEGORY);
